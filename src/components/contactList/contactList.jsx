@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { contacts, getContacts } from "./functionality";
+import { contacts, getContacts , updateContacts } from "./functionality";
 
 function ContactList() {
 
