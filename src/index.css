@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb{
+    background-color: rgba(111, 111, 184, 0.541);
+    border-radius: 10px;
+  }

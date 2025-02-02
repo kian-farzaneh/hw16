@@ -5,7 +5,19 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+    },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      addUtilities({
+        '.direction-rtl': {
+          direction: 'rtl',
+        },
+        '.direction-ltr': {
+          direction: 'ltr',
+        },
+      }, ['responsive', 'hover']);
+    },
+  ],
 }
