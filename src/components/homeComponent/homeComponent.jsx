@@ -6,8 +6,8 @@ import ContactList from "../contactList/contactList";
 function HomeComponents() {
     return <>
         <Header />
-        <CreateContact />
         <ContactList />
+        <CreateContact />
     </>;
 };
 
