@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react"
-import { contacts, getContacts , updateContacts } from "./functionality";
+import { contacts, getContacts , updateContacts , handleDelete } from "./functionality";
 
 function ContactList() {
 
-    const [contactList, setContactList] = useState([]); // ذخیره‌سازی داده‌ها در state
+    const [contactList, setContactList] = useState([]); 
 
     useEffect(() => {
         async function fetchContacts() {
             await getContacts();
-            setContactList(contacts); // به روز رسانی contactList با داده‌های دریافت شده
+            setContactList(contacts); 
         }
         fetchContacts();
     }, []);
@@ -37,7 +37,7 @@ function ContactList() {
                             <p>{item.email}</p><p className="font-bold">: ایمیل</p>
                         </div>
                         <div className="text-white mx-3 my-2 flex">
-                            <button data-id={item.id} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
+                            <button data-id={item.id} onClick={(e)=>{handleDelete(e,contactList,setContactList)}} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
                             <button data-id={item.id} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
                         </div>
                     </div>
