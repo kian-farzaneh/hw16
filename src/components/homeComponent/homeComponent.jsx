@@ -6,8 +6,10 @@ import ContactList from "../contactList/contactList";
 function HomeComponents() {
     return <>
         <Header />
-        <ContactList />
-        <CreateContact />
+        <div className="flex">
+            <ContactList />
+            <CreateContact />
+        </div>
     </>;
 };
 

@@ -13,3 +13,11 @@
     background-color: rgba(111, 111, 184, 0.541);
     border-radius: 10px;
   }
+
+
+  .customShadow{
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  .customShadow2{
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.356);
+  }
