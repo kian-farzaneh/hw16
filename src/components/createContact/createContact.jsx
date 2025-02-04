@@ -1,6 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { updateContacts } from '../contactList/functionality'
+import { addContact } from "./functionalityCreate";
 
-function CreateContact() {
+
+function CreateContact({ contactToEdit, refreshContacts, clearContactToEdit }) {
+
+    const [name, setName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [relation, setRelation] = useState("");
+    const [email, setEmail] = useState("");
+
+    useEffect(() => {
+        if (contactToEdit) {
+            setName(contactToEdit.name);
+            setPhoneNumber(contactToEdit.phoneNumber);
+            setRelation(contactToEdit.relation);
+            setEmail(contactToEdit.email);
+        };
+    }, [contactToEdit])
+
+    const handleSubmit = async () => {
+        if (contactToEdit) {
+            try {
+                const updatedContact = await updateContacts(contactToEdit.id, name, phoneNumber, relation, email);
+                console.log('contact updated : ', updatedContact)
+                if (refreshContacts) refreshContacts();
+                if (clearContactToEdit) clearContactToEdit();
+            }
+            catch (err) {
+                console.error('error in update contact', err)
+            }
+        } else {
+            console.log('adding condition')
+        }
+        if (clearContactToEdit) clearContactToEdit();
+        setName("");
+        setPhoneNumber("");
+        setRelation("");
+        setEmail("");
+    }
+
+
+
+
+
+
+
+
+
+
     return <>
         <div className="w-1/2 shadow-custom ">
             <div className="flex justify-center items-center p-4 font-bold text-[25px]">
@@ -9,7 +57,7 @@ function CreateContact() {
             <div className="direction-rtl p-4">
                 <div>
                     <p className="font-bold text-[17px]">نام :</p>
-                    <input type="text" className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   نام ..." />
+                    <input type="text" onChange={(e) => { setName(e.target.value) }} value={name} className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   نام ..." />
                     <p className="text-red-600 mr-2 mt-1">لطفا نام را وارد کنید</p>
                 </div>
                 <div className="mt-4">
@@ -19,21 +67,23 @@ function CreateContact() {
                 </div>
                 <div className="mt-4">
                     <p className="font-bold text-[17px]">شماره موبایل :</p>
-                    <input type="text" className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   شماره موبایل ..." />
+                    <input type="text" onChange={(e) => { setPhoneNumber(e.target.value) }} value={phoneNumber} className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   شماره موبایل ..." />
                     <p className="text-red-600 mr-2 mt-1">لطفا شماره موبایل را وارد کنید</p>
                 </div>
                 <div className="mt-4">
                     <p className="font-bold text-[17px]">نسبت</p>
-                    <input type="text" className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="  نسبت ..." />
+                    <input type="text" onChange={(e) => setRelation(e.target.value)} value={relation} className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="  نسبت ..." />
                     <p className="text-red-600 mr-2 mt-1">لطفا نسبت خود را انتخاب کنید</p>
                 </div>
                 <div className="mt-4">
                     <p className="font-bold text-[17px]">ایمیل :</p>
-                    <input type="text" className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="  ایمیل ..." />
+                    <input type="text" onChange={(e) => setEmail(e.target.value)} value={email} className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="  ایمیل ..." />
                     <p className="text-red-600 mr-2 mt-1">لطفا ایمیل را وارد کنید</p>
                 </div>
                 <div className="mt-4">
-                    <button className="bg-[#647382] text-white p-3 rounded-md customShadow2 font-bold">اضافه کردن</button>
+                    <button onClick={handleSubmit} className="bg-[#647382] text-white p-3 rounded-md customShadow2 font-bold">
+                        {contactToEdit ? "ویرایش کردن" : "اضافه کردن"}
+                    </button>
                 </div>
             </div>
         </div>

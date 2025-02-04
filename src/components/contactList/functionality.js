@@ -24,7 +24,22 @@ export async function updateContacts(id,name,phoneNumber,relation,email) {
     return result 
 };
 
+export function handleUpdate(event) {
+    const contactId = event.target.dataset.id ;
+    
+};
 // updateContacts(17,"گرگعلی غلامی","09022124314","دوست","gorgali@gmail.com")
+
+
+
+
+
+
+
+
+
+
+
 
 export async function deleteContact(id) {
     const response = await fetch(`https://676a57fa863eaa5ac0de0a39.mockapi.io/api/v1/contacts/${id}`,{

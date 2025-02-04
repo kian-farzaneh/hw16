@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
-import { contacts, getContacts , updateContacts , handleDelete } from "./functionality";
+import { contacts, getContacts , handleUpdate , handleDelete } from "./functionality";
 
-function ContactList() {
+
+function ContactList({setContactToEdit,refreshFlag}) {
 
     const [contactList, setContactList] = useState([]); 
 
@@ -11,7 +12,7 @@ function ContactList() {
             setContactList(contacts); 
         }
         fetchContacts();
-    }, []);
+    }, [refreshFlag]);
 
     return <div className="w-1/2 flex flex-col items-center gap-5">
 
@@ -38,7 +39,7 @@ function ContactList() {
                         </div>
                         <div className="text-white mx-3 my-2 flex">
                             <button data-id={item.id} onClick={(e)=>{handleDelete(e,contactList,setContactList)}} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
-                            <button data-id={item.id} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
+                            <button data-id={item.id} onClick={() => setContactToEdit(item)} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
                         </div>
                     </div>
                 )
