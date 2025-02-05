@@ -6,8 +6,13 @@ import DeleteModal from "../contactList/deleteModal/deleteModal";
 
 function HomeComponents() {
 
-    const [contactToEdit,setContactToEdit] = useState(null);
-    const [refreshFlag,setRefreshFlag] = useState(false)
+    const [contactToEdit, setContactToEdit] = useState(null);
+    const [refreshFlag, setRefreshFlag] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [contactToDelete, setContactToDelete] = useState(null)
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
 
     const refreshContacts = () => {
         setRefreshFlag((prev) => !prev)
@@ -18,11 +23,28 @@ function HomeComponents() {
     }
 
     return <>
-        <DeleteModal />
+
+        <DeleteModal
+            modalState={isModalOpen}
+            closeModalBtn={closeModal}
+            contactId={contactToDelete}
+            onDeleteSuccess={refreshContacts}
+        />
+
         <Header />
+
         <div className="flex">
-            <ContactList setEdit={setContactToEdit} refreshFlag={refreshFlag}/>
-            <CreateContact setEdit={contactToEdit} refreshContacts={refreshContacts} clearContactToEdit={clearContactToEdit}/>
+            <ContactList
+                setDelete={setContactToDelete}
+                setEdit={setContactToEdit}
+                refreshFlag={refreshFlag}
+                openModalBtn={openModal}
+            />
+            <CreateContact
+                setEdit={contactToEdit}
+                refreshContacts={refreshContacts}
+                clearContactToEdit={clearContactToEdit}
+            />
         </div>
     </>;
 };

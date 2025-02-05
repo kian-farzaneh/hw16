@@ -44,11 +44,6 @@ export function handleUpdate(event) {
 
 
 
-
-
-
-
-
 export async function deleteContact(id) {
     const response = await fetch(`https://676a57fa863eaa5ac0de0a39.mockapi.io/api/v1/contacts/${id}`,{
         method: 'DELETE',

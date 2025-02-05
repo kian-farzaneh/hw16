@@ -4,7 +4,7 @@ import { contacts, getContacts , handleUpdate , handleDelete } from "./functiona
 
 function ContactList(prop) {
 
-    const {setEdit,refreshFlag} = prop;
+    const {setEdit,refreshFlag,openModalBtn,setDelete} = prop;
 
     const [contactList, setContactList] = useState([]); 
 
@@ -16,6 +16,7 @@ function ContactList(prop) {
         fetchContacts();
     }, [refreshFlag]);
 
+    
     return <div className="w-1/2 flex flex-col items-center gap-5">
 
         <div className="flex items-center p-2 font-bold text-[25px]">
@@ -40,7 +41,10 @@ function ContactList(prop) {
                             <p>{item.email}</p><p className="font-bold">: ایمیل</p>
                         </div>
                         <div className="text-white mx-3 my-2 flex">
-                            <button data-id={item.id} onClick={(e)=>{handleDelete(e,contactList,setContactList)}} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
+                            <button data-id={item.id} onClick={() => {
+                                        prop.openModalBtn();
+                                        prop.setDelete(item.id);
+                            }} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
                             <button data-id={item.id} onClick={() => setEdit(item)} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
                         </div>
                     </div>
