@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react"
 import { contacts, getContacts , handleUpdate , handleDelete } from "./functionality";
 
 
-function ContactList({setContactToEdit,refreshFlag}) {
+function ContactList(prop) {
+
+    const {setEdit,refreshFlag} = prop;
 
     const [contactList, setContactList] = useState([]); 
 
@@ -39,7 +41,7 @@ function ContactList({setContactToEdit,refreshFlag}) {
                         </div>
                         <div className="text-white mx-3 my-2 flex">
                             <button data-id={item.id} onClick={(e)=>{handleDelete(e,contactList,setContactList)}} className="bg-red-600 p-2 rounded-tl-md rounded-bl-md">حذف</button>
-                            <button data-id={item.id} onClick={() => setContactToEdit(item)} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
+                            <button data-id={item.id} onClick={() => setEdit(item)} className="bg-blue-600 p-2 rounded-tr-md rounded-br-md">ویرایش</button>
                         </div>
                     </div>
                 )

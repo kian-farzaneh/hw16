@@ -3,7 +3,7 @@ import { updateContacts } from '../contactList/functionality'
 import { addContact } from "./functionalityCreate";
 
 
-function CreateContact({ contactToEdit, refreshContacts, clearContactToEdit }) {
+function CreateContact({ setEdit, refreshContacts, clearContactToEdit }) {
 
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -11,33 +11,44 @@ function CreateContact({ contactToEdit, refreshContacts, clearContactToEdit }) {
     const [email, setEmail] = useState("");
 
     useEffect(() => {
-        if (contactToEdit) {
-            setName(contactToEdit.name);
-            setPhoneNumber(contactToEdit.phoneNumber);
-            setRelation(contactToEdit.relation);
-            setEmail(contactToEdit.email);
+        if (setEdit) {
+            setName(setEdit.name);
+            setPhoneNumber(setEdit.phoneNumber);
+            setRelation(setEdit.relation);
+            setEmail(setEdit.email);
         };
-    }, [contactToEdit])
+    }, [setEdit])
 
     const handleSubmit = async () => {
-        if (contactToEdit) {
+        if (setEdit) {
             try {
-                const updatedContact = await updateContacts(contactToEdit.id, name, phoneNumber, relation, email);
+                const updatedContact = await updateContacts(setEdit.id, name, phoneNumber, relation, email);
                 console.log('contact updated : ', updatedContact)
                 if (refreshContacts) refreshContacts();
                 if (clearContactToEdit) clearContactToEdit();
+                setName("");
+                setPhoneNumber("");
+                setRelation("");
+                setEmail("");
             }
             catch (err) {
                 console.error('error in update contact', err)
             }
         } else {
-            console.log('adding condition')
+            try {
+                const newContact = await addContact(name, phoneNumber, relation, email);
+                console.log('contact added:', newContact);
+                if (refreshContacts) refreshContacts();
+                setName("");
+                setPhoneNumber("");
+                setRelation("");
+                setEmail("");
+            } catch (err) {
+                console.error('error in adding contact', err);
+            }
         }
         if (clearContactToEdit) clearContactToEdit();
-        setName("");
-        setPhoneNumber("");
-        setRelation("");
-        setEmail("");
+
     }
 
 
@@ -82,7 +93,7 @@ function CreateContact({ contactToEdit, refreshContacts, clearContactToEdit }) {
                 </div>
                 <div className="mt-4">
                     <button onClick={handleSubmit} className="bg-[#647382] text-white p-3 rounded-md customShadow2 font-bold">
-                        {contactToEdit ? "ویرایش کردن" : "اضافه کردن"}
+                        {setEdit ? "ویرایش کردن" : "اضافه کردن"}
                     </button>
                 </div>
             </div>

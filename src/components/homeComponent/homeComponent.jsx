@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../header/header";
 import CreateContact from "../createContact/createContact";
 import ContactList from "../contactList/contactList";
+import DeleteModal from "../contactList/deleteModal/deleteModal";
 
 function HomeComponents() {
 
@@ -17,10 +18,11 @@ function HomeComponents() {
     }
 
     return <>
+        <DeleteModal />
         <Header />
         <div className="flex">
-            <ContactList setContactToEdit={setContactToEdit} refreshFlag={refreshFlag}/>
-            <CreateContact contactToEdit={contactToEdit} refreshContacts={refreshContacts} clearContactToEdit={clearContactToEdit}/>
+            <ContactList setEdit={setContactToEdit} refreshFlag={refreshFlag}/>
+            <CreateContact setEdit={contactToEdit} refreshContacts={refreshContacts} clearContactToEdit={clearContactToEdit}/>
         </div>
     </>;
 };
