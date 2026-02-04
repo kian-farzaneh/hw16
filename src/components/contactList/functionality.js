@@ -1,7 +1,7 @@
 export let contacts = null
 
 export async function getContacts() {
-    const response = await fetch('https://676a57fa863eaa5ac0de0a39.mockapi.io/api/v1/contacts')
+    const response = await fetch('https://6983540a9c3efeb892a560b7.mockapi.io/contacts')
     const result = await response.json()
     contacts = result
             
@@ -9,7 +9,7 @@ export async function getContacts() {
 
 export async function updateContacts(id,name,phoneNumber,relation,email) {
     try{
-        const response = await fetch(`https://676a57fa863eaa5ac0de0a39.mockapi.io/api/v1/contacts/${id}`,{
+        const response = await fetch(`https://6983540a9c3efeb892a560b7.mockapi.io/contacts/${id}`,{
             method: 'PUT',
             headers:{
                 'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export function handleUpdate(event) {
 
 
 export async function deleteContact(id) {
-    const response = await fetch(`https://676a57fa863eaa5ac0de0a39.mockapi.io/api/v1/contacts/${id}`,{
+    const response = await fetch(`https://6983540a9c3efeb892a560b7.mockapi.io/contacts/${id}`,{
         method: 'DELETE',
         headers:{
             "Content-Type" : "application/json"
