@@ -67,14 +67,9 @@ function CreateContact({ setEdit, refreshContacts, clearContactToEdit }) {
             </div>
             <div className="direction-rtl p-4">
                 <div>
-                    <p className="font-bold text-[17px]">نام :</p>
+                    <p className="font-bold text-[17px]">نام و نام خانوادگی:</p>
                     <input type="text" onChange={(e) => { setName(e.target.value) }} value={name} className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   نام ..." />
                     <p className="text-red-600 mr-2 mt-1">لطفا نام را وارد کنید</p>
-                </div>
-                <div className="mt-4">
-                    <p className="font-bold text-[17px]">نام خانوادگی :</p>
-                    <input type="text" className="w-[90%] p-1 mt-2 mr-2 rounded-[5px] customShadow" placeholder="   نام خانوادگی ..." />
-                    <p className="text-red-600 mr-2 mt-1">لطفا نام خانوادگی را وارد کنید</p>
                 </div>
                 <div className="mt-4">
                     <p className="font-bold text-[17px]">شماره موبایل :</p>
